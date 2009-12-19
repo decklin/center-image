@@ -1,0 +1,15 @@
+{
+  "name": "Center Image",
+  "version": "1.0",
+  "description": "Center display of directly-viewed images",
+  "content_scripts": [
+    {
+      "js": [ "center-image.js" ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}
