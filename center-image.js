@@ -12,4 +12,7 @@ if (html.childNodes.length == 1 && html.firstChild == body &&
         right = '0';
         margin = 'auto';
     }
+    chrome.extension.sendRequest('bgcolor', function(response) {
+        body.style.backgroundColor = response;
+    });
 }

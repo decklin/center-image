@@ -2,6 +2,8 @@
   "name": "Center Image",
   "version": "1.0",
   "description": "Center display of directly-viewed images",
+  "options_page": "options.html",
+  "background_page": "background.html",
   "content_scripts": [
     {
       "js": [ "center-image.js" ],
