@@ -6,15 +6,16 @@ var imgs = document.getElementsByTagName('img');
 // generated image "page". It might break at any time.
 
 if (html.childNodes.length == 1 && html.firstChild == body &&
-        body.childNodes.length == 1 && body.firstChild == imgs[0]) {
-    with (imgs[0].style) {
-        position = 'absolute';
-        top = '0';
-        left = '0';
-        bottom = '0';
-        right = '0';
-        margin = 'auto';
-    }
+    body.childNodes.length == 1 && body.firstChild == imgs[0])
+{
+    html.style.display = 'table';
+    html.style.width = '100%';
+    html.style.height = '100%';
+
+    body.style.display = 'table-cell';
+    body.style.verticalAlign = 'middle';
+    body.style.textAlign = 'center';
+
     chrome.extension.sendRequest('bgcolor', function(response) {
         body.style.backgroundColor = response;
     });
