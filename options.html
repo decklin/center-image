@@ -2,27 +2,22 @@
 
 <html>
 <head>
-<title>Center Image options</title>
-<style>
-#bgcolor {
-    font-family: monospace;
-}
-</style>
-<script>
-function loadColor() {
-    var input = document.getElementById('bgcolor');
-    input.value = localStorage['bgcolor'] || '#ffffff';
-}
-function saveColor() {
-    var input = document.getElementById('bgcolor');
-    localStorage['bgcolor'] = input.value;
-}
-</script>
+  <title>Center Image options</title>
+  <link rel="stylesheet" href="common/options.css" />
+  <script src="common/config.js"></script>
+  <script src="options.js"></script>
 </head>
-<body onload="loadColor();">
+<body onload="init();">
   <h1>Center Image options</h1>
-  <p>You can set the background color here.</p>
-  <p>Color: <input id="bgcolor" size="7" /></p>
-  <p><input type="button" onclick="saveColor();" value="Save Options" /></p>
+  <div class="option">
+    <p class="label">Background Color:</p>
+    <input type="text" class="css" id="bgcolor" />
+    <p class="description">
+      any CSS color
+    </p>
+  </div>
+  <div class="actions">
+    <p><input type="button" onclick="save();" value="Save Options" /></p>
+  </div>
 </body>
 </html>

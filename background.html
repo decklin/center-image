@@ -1,6 +1,2 @@
-<script>
-chrome.extension.onRequest.addListener(function(req, src, send) {
-    if (req == 'bgcolor' && localStorage['bgcolor'])
-        send(localStorage['bgcolor']);
-});
-</script>
+<script src="common/config.js"></script>
+<script src="background.js"></script>
