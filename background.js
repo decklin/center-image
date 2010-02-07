@@ -1,7 +1,14 @@
 config.defaults({
-    bgcolor: '#ffffff'
+    bgcolor: '#ffffff',
+    checks: false
 });
 
 chrome.extension.onRequest.addListener(function(req, src, send) {
-    send(config.get(req));
+    if (req == 'background') {
+        send({
+            checks: config.get('checks'),
+            bgcolor: config.get('bgcolor')
+        });
+    }
 });
+

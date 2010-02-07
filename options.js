@@ -1,7 +1,13 @@
+function $(id) {
+    return document.getElementById(id);
+}
+
 function init() {
-    document.getElementById('bgcolor').value = config.get('bgcolor');
+    $('bgcolor').value = config.get('bgcolor');
+    $('checks').checked = config.get('checks');
 }
 
 function save() {
-    config.set('bgcolor', document.getElementById('bgcolor').value);
+    config.set('bgcolor', $('bgcolor').value);
+    config.set('checks', $('checks').checked);
 }
