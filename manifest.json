@@ -11,7 +11,7 @@
   "content_scripts": [
     {
       "js": [ "center-image.js" ],
-      "matches": [ "http://*/*", "https://*/*" ],
+      "matches": [ "http://*/*", "https://*/*", "file://*/*" ],
       "run_at": "document_end"
     }
   ]
