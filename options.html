@@ -3,11 +3,11 @@
 <html>
 <head>
   <title>Center Image options</title>
-  <link rel="stylesheet" href="common/options.css" />
-  <script src="common/config.js"></script>
+  <link rel="stylesheet" href="options.css" />
   <script src="options.js"></script>
 </head>
-<body onload="init();">
+<body>
+<form id="options" action="javascript:;">
   <h1>Center Image options</h1>
   <div class="option">
     <p class="label">Background Color:</p>
@@ -29,7 +29,8 @@
     </p>
   </div>
   <div class="actions">
-    <p><input type="button" onclick="save();" value="Save Options" /></p>
+    <p><span id="status"></span> <input type="submit" value="Save Options" /></p>
   </div>
+</form>
 </body>
 </html>

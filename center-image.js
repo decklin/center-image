@@ -14,11 +14,14 @@ if (images && images.length === 1 && images[0].src === location.href) {
     body.style.verticalAlign = 'middle';
     body.style.textAlign = 'center';
 
-    chrome.extension.sendRequest('background', function(response) {
-        if (response.checks) {
+    chrome.storage.sync.get({
+        bgcolor: 'white',
+        checks: false
+    }, function(config) {
+        if (config.checks) {
             drawChecks();
-        } else if (response.bgcolor) {
-            body.style.backgroundColor = response.bgcolor;
+        } else if (config.bgcolor) {
+            body.style.backgroundColor = config.bgcolor;
         }
     });
 }
@@ -26,25 +29,15 @@ if (images && images.length === 1 && images[0].src === location.href) {
 function drawChecks() {
     var gridSize = 16;
     var canvas = document.createElement('canvas');
-    canvas.width = window.screen.width;
-    canvas.height = window.screen.height;
-
-    html.style.backgroundColor = '#666';
+    canvas.width = gridSize*2;
+    canvas.height = gridSize*2;
 
     ctx = canvas.getContext('2d');
     ctx.fillStyle = '#999';
+    ctx.fillRect(0, 0, gridSize, gridSize);
+    ctx.fillRect(gridSize, gridSize, gridSize, gridSize);
 
-    for (var x = 0; x < Math.ceil(canvas.width/gridSize); x++){
-        for (var y = 0; y < Math.ceil(canvas.height/gridSize); y++){
-            if ((x + y) % 2 === 0)
-                ctx.fillRect(x*gridSize, y*gridSize, gridSize, gridSize);
-        }
-    }
-
-    canvas.style.zIndex ='-1';
-    canvas.style.position ='fixed';
-    canvas.style.left ='0';
-    canvas.style.top ='0';
-
-    body.appendChild(canvas);
+    body.style.backgroundColor = '#666';
+    body.style.backgroundRepeat = 'repeat';
+    body.style.backgroundImage = 'url('+canvas.toDataURL("image/png")+')';
 }
