@@ -5,7 +5,7 @@ chrome.webRequest.onResponseStarted.addListener(function(details) {
 	var contentType;
 	for (var i = 0; i < headers.length; ++ i) {
 		var header = headers[i];
-		if (header.name === "content-type") {
+		if (header.name.toLowerCase() === "content-type") {
 			contentType = header.value;
 		}
 	}
