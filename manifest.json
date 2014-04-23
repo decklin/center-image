@@ -8,14 +8,13 @@
     "32": "desoto-32.png"
   },
   "options_page": "options.html",
-  "content_scripts": [
-    {
-      "js": [ "center-image.js" ],
-      "matches": ["<all_urls>"],
-      "run_at": "document_end"
-    }
-  ],
+  "background": {
+      "scripts": ["background.js"]
+  },
   "permissions": [
-    "storage"
+    "storage",
+    "<all_urls>",
+    "webRequest",
+    "tabs"
   ]
 }
