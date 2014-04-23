@@ -49,7 +49,8 @@ li > p:only-child {
     margin: 1px;
     padding: 4px;
 }
-.option > input[type="text"] {
+.option > input[type="text"],
+.option > input[type="color"] {
     font: 15px sans-serif;
     border: 1px inset #eee;
     margin: 1px 0 1px 140px;

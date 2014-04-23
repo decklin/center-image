@@ -4,7 +4,7 @@ function $(id) {
 
 function load() {
     chrome.storage.sync.get({
-        bgcolor: 'white',
+        bgcolor: '#ffffff',
         checks: false
     }, function(config) {
         $('bgcolor').value = config.bgcolor;

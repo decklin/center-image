@@ -10,7 +10,7 @@ body.style.verticalAlign = 'middle';
 body.style.textAlign = 'center';
 
 chrome.storage.sync.get({
-    bgcolor: 'white',
+    bgcolor: '#ffffff',
     checks: false
 }, function(config) {
     if (config.checks) {
