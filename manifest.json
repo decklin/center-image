@@ -1,4 +1,5 @@
 {
+  "manifest_version": 2,
   "name": "Center Image",
   "version": "2.1",
   "description": "Center display of directly-viewed images",
@@ -7,12 +8,13 @@
     "32": "desoto-32.png"
   },
   "options_page": "options.html",
-  "background_page": "background.html",
-  "content_scripts": [
-    {
-      "js": [ "center-image.js" ],
-      "matches": [ "http://*/*", "https://*/*" ],
-      "run_at": "document_end"
-    }
+  "background": {
+      "scripts": ["background.js"]
+  },
+  "permissions": [
+    "storage",
+    "<all_urls>",
+    "webRequest",
+    "tabs"
   ]
 }

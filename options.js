@@ -2,12 +2,34 @@ function $(id) {
     return document.getElementById(id);
 }
 
-function init() {
-    $('bgcolor').value = config.get('bgcolor');
-    $('checks').checked = config.get('checks');
+function load() {
+    chrome.storage.sync.get({
+        bgcolor: '#ffffff',
+        checks: false
+    }, function(config) {
+        $('bgcolor').value = config.bgcolor;
+        $('checks').checked = config.checks;
+    });
 }
 
 function save() {
-    config.set('bgcolor', $('bgcolor').value);
-    config.set('checks', $('checks').checked);
+    chrome.storage.sync.set({
+        bgcolor: $('bgcolor').value,
+        checks: $('checks').checked
+    }, function() {
+        // Update status to let user know options were saved.
+        var status = $('status');
+        status.textContent = 'Options saved.';
+        setTimeout(function() {
+            status.textContent = '';
+        }, 1250);
+    });
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    load();
+    $('options').addEventListener('submit', function (event) {
+        save();
+        event.preventDefault();
+    });
+});

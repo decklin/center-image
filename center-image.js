@@ -1,50 +1,59 @@
-var html = document.documentElement;
-var body = document.body;
-var images = document.images;
-
-// This is a rather hacky heuristic for determining if we are in fact on a
-// generated image "page". It might break at any time.
-
-if (images && images.length === 1 && images[0].src === location.href) {
-    html.style.display = 'table';
-    html.style.width = '100%';
-    html.style.height = '100%';
-
-    body.style.display = 'table-cell';
-    body.style.verticalAlign = 'middle';
-    body.style.textAlign = 'center';
-
-    chrome.extension.sendRequest('background', function(response) {
-        if (response.checks) {
-            drawChecks();
-        } else if (response.bgcolor) {
-            body.style.backgroundColor = response.bgcolor;
-        }
-    });
+if (document.body) {
+	centerImage();
+}
+else {
+	setTimeout(retry, 0);
 }
 
-function drawChecks() {
-    var gridSize = 16;
-    var canvas = document.createElement('canvas');
-    canvas.width = window.screen.width;
-    canvas.height = window.screen.height;
+var retryCount = 0;
+function retry () {
+	if (document.body) {
+		centerImage();
+	}
+	else if (retryCount === 3) {
+		document.addEventListener("DOMContentLoaded", centerImage);
+	}
+	else {
+		setTimeout(retry, 50);
+	}
+}
 
-    html.style.backgroundColor = '#666';
-
-    ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#999';
-
-    for (var x = 0; x < Math.ceil(canvas.width/gridSize); x++){
-        for (var y = 0; y < Math.ceil(canvas.height/gridSize); y++){
-            if ((x + y) % 2 === 0)
-                ctx.fillRect(x*gridSize, y*gridSize, gridSize, gridSize);
-        }
-    }
-
-    canvas.style.zIndex ='-1';
-    canvas.style.position ='fixed';
-    canvas.style.left ='0';
-    canvas.style.top ='0';
-
-    body.appendChild(canvas);
+function centerImage() {
+	var html = document.documentElement;
+	var body = document.body;
+	
+	html.style.display = 'table';
+	html.style.width = '100%';
+	html.style.height = '100%';
+	
+	body.style.display = 'table-cell';
+	body.style.verticalAlign = 'middle';
+	body.style.textAlign = 'center';
+	
+	chrome.storage.sync.get({
+	    bgcolor: '#ffffff',
+	    checks: false
+	}, function(config) {
+	    if (config.checks) {
+	        drawChecks();
+	    } else if (config.bgcolor) {
+	        body.style.backgroundColor = config.bgcolor;
+	    }
+	});
+	
+	function drawChecks() {
+	    var gridSize = 16;
+	    var canvas = document.createElement('canvas');
+	    canvas.width = gridSize*2;
+	    canvas.height = gridSize*2;
+	
+	    ctx = canvas.getContext('2d');
+	    ctx.fillStyle = '#999';
+	    ctx.fillRect(0, 0, gridSize, gridSize);
+	    ctx.fillRect(gridSize, gridSize, gridSize, gridSize);
+	
+	    body.style.backgroundColor = '#666';
+	    body.style.backgroundRepeat = 'repeat';
+	    body.style.backgroundImage = 'url('+canvas.toDataURL("image/png")+')';
+	}
 }

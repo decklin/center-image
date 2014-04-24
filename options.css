@@ -1,0 +1,95 @@
+html {
+    padding: 1em;
+    background: fixed -webkit-gradient(
+        linear, 0 0, 0 100%, from(#bbd0e7), to(#42566b)
+    );
+    overflow-y: scroll;
+}
+body {
+    margin: auto;
+    padding: 0.5em 2em;
+    width: 45em;
+    border: 1px solid #7c8085;
+    background: -webkit-gradient(
+        linear, 0 0, 0 32, from(#f2f2f2), to(#fff)
+    );
+    -webkit-box-shadow: 4px 4px 4px #0d2033;
+}
+
+h1 {
+    font-family: sans-serif;
+    font-size: xx-large;
+    border-bottom: 1px solid #989da3;
+}
+h2 {
+    font-family: sans-serif;
+    font-size: large;
+    border-bottom: 1px solid #d2d8e1;
+}
+.warning {
+    font-family: sans-serif;
+    font-size: smaller;
+    background: #fafada;
+    border: 1px solid #bfbfa7;
+    padding: 0.5em;
+}
+li > p:only-child {
+    margin: 0;
+}
+
+.option {
+    margin: 1em 0;
+}
+.option > .label {
+    position: absolute;
+    background: #eee;
+    border: 1px solid #ccc;
+    font: 15px sans-serif;
+    width: 120px;
+    margin: 1px;
+    padding: 4px;
+}
+.option > input[type="text"],
+.option > input[type="color"] {
+    font: 15px sans-serif;
+    border: 1px inset #eee;
+    margin: 1px 0 1px 140px;
+    padding: 4px;
+}
+.option > .description {
+    font-size: smaller;
+    color: #888;
+    margin: 1px 0 1px 140px;
+    padding: 0 2px;
+}
+.option > .ticky {
+    margin: 1px 0 1px 140px;
+}
+
+.actions {
+    text-align: right;
+}
+.actions > input[type="button"]:last-child {
+    margin-right: 0;
+}
+
+input[type="text"].css {
+    width: 32em;
+}
+input[type="text"].url {
+    font-family: monospace;
+    width: 32em;
+}
+input[type="text"].color {
+    font-family: monospace;
+    width: 8em;
+}
+
+table.commands {
+    width: 90%;
+    margin: auto;
+}
+table.commands th {
+    background: #eee;
+    text-align: left;
+}
