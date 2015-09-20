@@ -5,7 +5,7 @@ var images = document.images;
 // This is a rather hacky heuristic for determining if we are in fact on a
 // generated image "page". It might break at any time.
 
-if (images && images.length === 1 && images[0].src === location.href) {
+if (images && body.childElementCount === 1 && images[0] === body.children[0]) {
     html.style.display = 'table';
     html.style.width = '100%';
     html.style.height = '100%';
